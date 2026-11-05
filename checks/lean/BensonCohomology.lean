@@ -1,0 +1,22 @@
+-- Root module: imports every file of checks/lean/BensonCohomology/.
+import BensonCohomology.AcyclicHochschildContraction
+import BensonCohomology.CentralElementaryAbelian
+import BensonCohomology.CentralFactorPower
+import BensonCohomology.CharTwoSingularLift
+import BensonCohomology.CyclicChainMap
+import BensonCohomology.CyclicDegeneracy
+import BensonCohomology.DihedralNorm
+import BensonCohomology.DualCocycleSign
+import BensonCohomology.FiveTermSplice
+import BensonCohomology.ImageQuotient
+import BensonCohomology.LimOneAction
+import BensonCohomology.NilpotentIdealPower
+import BensonCohomology.NormRankTwoInvariance
+import BensonCohomology.PoincareFunctionalEquation
+import BensonCohomology.PosetEulerInversion
+import BensonCohomology.ShiftedBracket
+import BensonCohomology.SimplicialShuffle
+import BensonCohomology.SteenrodNormalisation
+import BensonCohomology.SymplecticHalving
+import BensonCohomology.TensorHomologyCounterexample
+import BensonCohomology.WhiteheadExactness

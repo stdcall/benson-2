@@ -1,0 +1,324 @@
+[
+ {
+  "file": "checks/lean/BensonCohomology/AcyclicHochschildContraction.lean",
+  "declarations": [
+   "BensonCohomology.AcyclicHochschildContraction.contraction",
+   "BensonCohomology.AcyclicHochschildContraction.chain_contraction",
+   "BensonCohomology.AcyclicHochschildContraction.printed_fails"
+  ],
+  "book": "Section 2.11, p. 73: on the acyclic Hochschild complex S_n(Lambda) = Lambda^(x (n+2)) with b'_n = sum_(i=0)^n (-1)^i (merge of the factors i, i+1) and s_(n+1) appending 1, b'_(n+1) s_(n+1) - s_n b'_n = (-1)^(n+1) id (as corrected), so that (-1)^n s_n is a chain contraction; the printed '= id' fails for n = 0.",
+  "limitations": "Pure tensors are words in a monoid M (the multiplicative monoid of Lambda) and the identity is proved in the free Z-module on words, term by term; the descent to Lambda^(x (n+2)) (where the maps are given by the same formulae on pure tensors) is not formalized. b' b' = 0 and the projectivity of S_n(Lambda) are not covered; the identity is also checked numerically for five algebras, n <= 3, in checks/sage/chapter-2b.py (section_2_11).",
+  "passages": [
+   "sec:hochschild"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/CentralElementaryAbelian.lean",
+  "declarations": [
+   "BensonCohomology.CentralElementaryAbelian.sup_elementaryAbelian",
+   "BensonCohomology.CentralElementaryAbelian.exists_central_order_p"
+  ],
+  "book": "Section 6.6, proof of Theorem 6.6.1 (Quillen, Thevenaz): for an elementary abelian subgroup A of a p-group P and P_0 = Omega_1 Z(P), the subgroup <A, P_0> is elementary abelian (any group G, A with commuting elements of order dividing p, Z = P_0 central with z^p = 1), so A <= <A, P_0> >= P_0 is a conical contraction of A_p(P)^H; and P_0 != 1: a non-trivial finite p-group has a central element of order p.",
+  "limitations": "Elementary abelian is expressed as commuting elements with x^p = 1; the H-invariance of P_0 (it is characteristic), the conical contractibility, Quillen's Lemma and Theorem 6.4.2 are not formalized. The statement that A P_0 is elementary abelian is checked for all elementary abelian A <= P and all p-subgroups P of the groups of order at most 100 (except 96) in checks/sage/chapter-6a.py.",
+  "passages": [
+   "th:quillen-equivalence"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/CentralFactorPower.lean",
+  "declarations": [
+   "BensonCohomology.CentralFactorPower.prod_map_mul_of_central",
+   "BensonCohomology.CentralFactorPower.pow_two_mul_sum",
+   "BensonCohomology.CentralFactorPower.pow_eq_zero_of_central_factors"
+  ],
+  "book": "Section 5.2, proof of Theorem 5.2.2: from zeta^(2 r_i) = beta(x_i) . zeta'_i (Theorem 5.2.1) with the beta(x_i) . 1_M central and beta(x_1) ... beta(x_n) = 0 (Serre), zeta^(2 sum r_i) = beta(x_1) ... beta(x_n) . (zeta'_1 o ... o zeta'_n) = 0.",
+  "limitations": "An arbitrary (not necessarily commutative) monoid with zero standing for Ext^*_(kG)(M, M) under Yoneda composition, ungraded, with the centrality of the beta(x_i) . 1_M as a hypothesis. Not formalized: Theorem 5.2.1 (Quillen-Venkov), Serre's theorem and the reduction to p-groups, whose conclusions are the hypotheses; both are checked for groups of order <= 32 in checks/sage/chapter-5a.py (Section 5.2).",
+  "passages": [
+   "th:nilpotent-restriction",
+   "th:quillen-venkov"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/CharTwoSingularLift.lean",
+  "declarations": [
+   "BensonCohomology.CharTwoSingularLift.Q_line",
+   "BensonCohomology.CharTwoSingularLift.unique_lift",
+   "BensonCohomology.CharTwoSingularLift.radical_line"
+  ],
+  "book": "Section 7.4, proof of Theorem 7.4.1 (ii), p. 245, used again in the proof of Corollary 7.4.3, p. 246: for a quadratic form q with polar form b in characteristic two, q(v + c r) = q(v) + c^2 q(r) when b(v, r) = 0; over a finite field each class v + K r with q(r) != 0 contains exactly one singular vector ('among its preimages is exactly one isotropic vector'); and a non-degenerate form has a radical of dimension at most one ('since the quadratic form is (semi)linear on this radical').",
+  "limitations": "K a finite field of characteristic 2, V any K-module, Q a function satisfying the polar identity and Q(c v) = c^2 Q(v), b bilinear; non-degeneracy on the radical is the hypothesis hnd for the line s + K r. That b is alternating with a non-zero radical in odd dimension, and the identification of H_0(F_M) with the orthogonal space, are not formalized; the radical, the unique lifts, their span and O_(2n+1)(F_q) = Sp_2n(F_q) are checked for GO(3, 2), GO(3, 4), GO(5, 2), GO(5, 4), GO(7, 2) in checks/sage/chapter-7b.py.",
+  "passages": [
+   "th:symplectic-fixed-point-homology",
+   "cor:symplectic-orthogonal-isomorphism"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/CyclicChainMap.lean",
+  "declarations": [
+   "BensonCohomology.CyclicChainMap.component_odd",
+   "BensonCohomology.CyclicChainMap.component_odd_zero",
+   "BensonCohomology.CyclicChainMap.component_even",
+   "BensonCohomology.CyclicChainMap.component_low"
+  ],
+  "book": "Section 2.13, p. 84: the map B_*(Lambda) -> CC_*(Lambda), x in degree (i, j) |-> x in degree (2i, j - i) plus (-1)^n s_n N x in degree (2i - 1, j - i + 1) (corrected; printed (2i, j - i - 1)), n = j - i, commutes with the differentials: column 2i - 1: N x - (-1)^n b'(s N x) = (-1)^(n-1) s N b x; column 2i - 2: eps((-1)^n s N x) = B x; column 2i - 3: (-1)^(n+1) s N B x = 0.",
+  "limitations": "Abstract graded abelian groups A n (= Lambda^(x (n+1))) with additive maps b, b', s, N, eps; the identities b' N = N b, N eps = 0 (p. 81) and b' s - s b' = (-1)^n (p. 73, corrected; cf. AcyclicHochschildContraction) are hypotheses, checked numerically in checks/sage/chapter-2b.py. The double complexes themselves, the injectivity and the homology equivalence of the map are not formalized (the chain map, injectivity and the equality of homology are checked there for five algebras in total degrees <= 4).",
+  "passages": [
+   "sec:cyclic-homology",
+   "prop:cyclic-tor"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/CyclicDegeneracy.lean",
+  "declarations": [
+   "BensonCohomology.CyclicDegeneracy.degeneracy_ge",
+   "BensonCohomology.CyclicDegeneracy.degeneracy_lt"
+  ],
+  "book": "Section 2.14, Examples 4 (p. 87): the degeneracies of the free cyclic object S[1] |x| X, s_i(t_n^j, x) = (t_(n+1)^j, s_(i-j) x) for j <= i and (t_(n+1)^(j+1), s_(i-j+n+1) x) for i < j (corrected; printed exponent j - 1), derived as the identities s_i t_n^j = t_(n+1)^j s_(i-j) and s_i t_n^j = t_(n+1)^(j+1) s_(i-j+n+1) from the relations s_i t_n = t_(n+1) s_(i-1) (1 <= i <= n) and s_0 t_n = t_(n+1)^2 s_n of p. 86.",
+  "limitations": "Only the two relations of p. 86 involving degeneracies are assumed, for arbitrary maps s, t between sets X n; the index i - j + n + 1 is written i + n + 1 - j in natural numbers. The face maps of Examples 4, the freeness (left adjointness) of S[1] |x| X and the homeomorphism of realisations are not formalized; faces and degeneracies are checked in a model of Connes' category (n <= 7), and S[1] |x| Delta[2] as a cyclic set (n <= 4), in checks/sage/chapter-2b.py (section_2_14).",
+  "passages": [
+   "sec:cyclic-sets"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/DihedralNorm.lean",
+  "declarations": [
+   "BensonCohomology.DihedralNorm.one_add_xyx",
+   "BensonCohomology.DihedralNorm.one_add_y",
+   "BensonCohomology.DihedralNorm.base_eq",
+   "BensonCohomology.DihedralNorm.u_A",
+   "BensonCohomology.DihedralNorm.v_A",
+   "BensonCohomology.DihedralNorm.u_B",
+   "BensonCohomology.DihedralNorm.v_B",
+   "BensonCohomology.DihedralNorm.pow_eq",
+   "BensonCohomology.DihedralNorm.norm_eq"
+  ],
+  "book": "Section 5.13, proof of Theorem 5.13.1 (ii), p. 197: with X = 1 + x, Y = 1 + y in characteristic two, X^2 = Y^2 = 0, the display ((1 + xyx)(1 + y))^(q/2) = ((Y + XY + YX + XYX) Y)^(q/2) = (YXY + XYXY)^(q/2) = (YX)^(q-1) Y + (XY)^q (the printed second expression lacks its first opening parenthesis); in particular 1 + xyx = Y + XY + YX + XYX.",
+  "limitations": "Any ring with (2 : R) = 0, X * X = 0, Y * Y = 0, and q/2 = m + 1 >= 1. That the left side is the sum of the elements of H = <xyx, y>, that the sum of the elements of G is (XY)^q, and the relation (XY)^q = (YX)^q of k D_4q are not formalized; they are checked in the group algebras of D_8, D_16, D_32 over F_2 in checks/sage/chapter-5b.py, which also checks the rank argument that follows.",
+  "passages": [
+   "th:dihedral-varieties"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/DualCocycleSign.lean",
+  "declarations": [
+   "BensonCohomology.DualCocycleSign.half_succ",
+   "BensonCohomology.DualCocycleSign.neg_one_pow_mul_self",
+   "BensonCohomology.DualCocycleSign.lam_eq",
+   "BensonCohomology.DualCocycleSign.lam_formula_consistent",
+   "BensonCohomology.DualCocycleSign.formula_one",
+   "BensonCohomology.DualCocycleSign.printed_label_wrong",
+   "BensonCohomology.DualCocycleSign.printed_label_one"
+  ],
+  "book": "Section 5.17, Proposition 5.17.2 and its proof, pp. 209-210: from lambda_1 = -1 and lambda_m lambda_n = (-1)^(mn) lambda_(m+n) it follows by induction that lambda_n = (-1)^(n(n+1)/2) (n >= 1), and this formula satisfies both conditions; the label of the left-hand map of the last diagram, printed (-1)^(n(n-1)/2), differs from lambda_n for every odd n (it is +1 for n = 1).",
+  "limitations": "The constants are integers (mapped to k); the hypotheses lambda_1 = -1 (transpose inverse of a unipotent matrix) and lambda_m lambda_n = (-1)^(mn) lambda_(m+n) (duality is an anti-automorphism of H^*(G, k)) and the identification of the induced map k -> k with lambda_n are not formalized; lambda_n is computed from chain maps for cyclic groups of order 3, 5, 7 and Z/3 x Z/3 in checks/sage/chapter-5b.py.",
+  "passages": [
+   "prop:dual-cocycle"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/FiveTermSplice.lean",
+  "declarations": [
+   "BensonCohomology.FiveTermSplice.five_term_cohomology",
+   "BensonCohomology.FiveTermSplice.five_term_homology"
+  ],
+  "book": "Section 3.2, Propositions 3.2.10 and 3.2.11: the five term sequences obtained by splicing 0 -> E_2^(10) -> H^1 -> E_inf^(01) -> 0, 0 -> E_inf^(01) -> E_2^(01) -> E_2^(20) -> E_inf^(20) -> 0 and 0 -> E_inf^(20) -> H^2 (and the homology analogues) are exact at each place.",
+  "limitations": "Abstract modules and linear maps with the exactness of the three pieces as hypotheses; their derivation from a first quadrant spectral sequence (Theorem 3.2.9, E_3 = H(E_2, d_2)) is not formalized; the five term sequences are checked with explicit maps in checks/sage/chapter-3a.py and, for group extensions (inflation-restriction), in checks/sage/chapter-3b.py.",
+  "passages": [
+   "prop:five-term-cohomology",
+   "prop:five-term-homology"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/ImageQuotient.lean",
+  "declarations": [
+   "BensonCohomology.ImageQuotient.range_f_le_range_h",
+   "BensonCohomology.ImageQuotient.comap_range_f",
+   "BensonCohomology.ImageQuotient.range_gOnImage",
+   "BensonCohomology.ImageQuotient.ker_gOnImage",
+   "BensonCohomology.ImageQuotient.imageQuotientEquiv",
+   "BensonCohomology.ImageQuotient.imageQuotientEquiv_mk"
+  ],
+  "book": "Section 3.2, Lemma 3.2.5: for a commutative diagram A -> D (a), f : A -> B, g : B -> C, h : D -> B, k : D -> C with h a = f, g h = k and Im f = Ker g, Im f <= Im h and g induces Im(h) / Im(f) ~ Im(k), sending the class of h(x) to k(x); the lemma behind Theorems 3.2.6 and 3.2.9.",
+  "limitations": "Modules over an arbitrary ring (abelian groups: R = ZZ). The diagrams of Theorems 3.2.6 and 3.2.9 (exactness of the long exact sequences of triples, Proposition 3.2.4) are not formalized; they are checked numerically in checks/sage/chapter-3a.py (seven filtered complexes, all pages).",
+  "passages": [
+   "lem:image-quotient",
+   "th:page-as-image",
+   "th:filtration-quotients"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/LimOneAction.lean",
+  "declarations": [
+   "BensonCohomology.LimOneAction.act_one",
+   "BensonCohomology.LimOneAction.act_mul",
+   "BensonCohomology.LimOneAction.act_one_eq_one_iff",
+   "BensonCohomology.LimOneAction.limOne_trivial_of_surjective",
+   "BensonCohomology.LimOneAction.addAct_eq",
+   "BensonCohomology.LimOneAction.addOrbit_iff"
+  ],
+  "book": "Section 1.9, the definition of lim^1 for inverse systems of groups: (g_n)(x_n) = (g_n x_n alpha_(n+1)(g_(n+1))^(-1)) is a left action of prod G_n on prod G_n, the stabiliser of (1, 1, ...) is lim G_n, lim^1 G_n is the orbit set (a pointed set), it is a point when every alpha_n is onto (Goerss-Jardine, Lemma VI.2.12 (2)), and for abelian G_n the orbits are the cosets of the image of partial(g)_n = g_n - alpha(g_(n+1)), so lim^1 is the cokernel of partial, an abelian group.",
+  "limitations": "Towers indexed by the natural numbers with arbitrary groups (additive section: abelian groups). The six-term exact sequence and Theorem 1.9.1 (Milnor exact sequence) are not formalized; the action is checked exhaustively on truncated towers and Theorem 1.9.1 on the skeleta of BZ/2 in checks/sage/chapter-1.py (section 1.9).",
+  "passages": [
+   "sec:milnor-sequence",
+   "th:milnor-exact-sequence"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/NilpotentIdealPower.lean",
+  "declarations": [
+   "BensonCohomology.NilpotentIdealPower.span_pow_sum_eq_bot",
+   "BensonCohomology.NilpotentIdealPower.isNilpotent_span"
+  ],
+  "book": "Section 5.3, Lemma 5.3.6: if the nilpotent ideal J is generated by elements x_i with x_i^(n_i) = 0, then J^n = 0 with n = sum_i n_i.",
+  "limitations": "Any commutative semiring and a non-empty finite family of generators (for J = 0 generated by no elements the book's n = 0 would give J^0 = A). Not formalized: that the nilpotent elements form a finitely generated ideal (A Noetherian) and gamma(A) = gamma(A/J); both are checked on graded examples in checks/sage/chapter-5a.py (Lemma 5.3.6).",
+  "passages": [
+   "lem:nilpotent-growth"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/NormRankTwoInvariance.lean",
+  "declarations": [
+   "BensonCohomology.NormRankTwoInvariance.invariance_iff",
+   "BensonCohomology.NormRankTwoInvariance.norm_x2_invariant"
+  ],
+  "book": "Section 4.1, the Example before Proposition 4.1.4 (p. 125) and Proposition 4.1.4 (i): in F_p[x1, x2], x2^p + lambda x1^(p-1) x2 is invariant under x2 -> x1 + x2 (the automorphism fixing the second generator and sending the first to its product with the second) iff lambda = -1, so norm(x2) = x2^p - x1^(p-1) x2.",
+  "limitations": "Only the part without the exterior generators y1, y2 (the coefficient mu of x1^(p-2) y1 x2 y2 is not treated), for any prime p; the general form of the norm (invariance under the automorphisms of the first factor) and the norm itself are not formalized; they are checked in checks/sage/chapter-4a.py (the invariant forms for p <= 13 and the chain-level norm for p = 3, 5).",
+  "passages": [
+   "prop:norm-rank-two"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/PoincareFunctionalEquation.lean",
+  "declarations": [
+   "BensonCohomology.PoincareFunctionalEquation.one_sub_u_pow",
+   "BensonCohomology.PoincareFunctionalEquation.prod_inv",
+   "BensonCohomology.PoincareFunctionalEquation.functional_equation",
+   "BensonCohomology.PoincareFunctionalEquation.sum_sub_one",
+   "BensonCohomology.PoincareFunctionalEquation.sum_eq_length",
+   "BensonCohomology.PoincareFunctionalEquation.polynomial_degrees_one"
+  ],
+  "book": "Section 5.18, the last display of the proof of Theorem 5.18.1 (p. 212): if p(t) = f(t) / prod (1 - t^(n_i)) and t^s f(1/t) = f(t) with s = sum (n_i - 1), then p(1/t) = (-t)^r p(t); and the step of Corollary 5.18.2 (p. 213): for p(t) = 1 / prod (1 - t^(d_i)) the functional equation forces all d_i = 1.",
+  "limitations": "Values at one element t of a field with t u = 1 (u = 1/t), so the identity of rational functions is checked pointwise for every admissible t; the degree statement uses the equation at t = 2 in Q. The spectral sequence argument giving p = f / prod (1 - t^(n_i)), the duality of f (Corollary 5.17.4 in its corrected form) and the Cohen-Macaulay hypothesis are not formalized; the Poincare series of elementary abelian, dihedral, quaternion and other groups are checked numerically in checks/sage/chapter-5b.py.",
+  "passages": [
+   "th:cohen-macaulay-functional-equation",
+   "cor:polynomial-cohomology"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/PosetEulerInversion.lean",
+  "declarations": [
+   "BensonCohomology.PosetEulerInversion.euler_eq_sum_upper",
+   "BensonCohomology.PosetEulerInversion.euler_of_least",
+   "BensonCohomology.PosetEulerInversion.sum_reduced_upper_of_least"
+  ],
+  "book": "Section 6.9, Proposition 6.9.1 at the mark of a subgroup H (the Euler characteristic of the fixed points, p. 220): for a finite poset s, chi(s) = sum over x in s of (1 - chi((x, -)_s)) = - sum_x chi~((x, -)_s), by the book's proof (the chains with least element x are the chains of (x, -)_s with x added, which shifts the dimension by one); and for a poset with a least element (a cone, such as (S_p(G) u {1})^H with the least element 1, p. 218) chi = 1, so sum_x chi~((x, -)_s) = -1: the identity of Theorem 6.9.3 at the mark of H once (P, -)^H is identified with S_p(N_G(P)/P)^H by Proposition 6.9.2.",
+  "limitations": "Euler characteristics are defined from the chains of a finite partial order (the order complex of Section 6.2); the equivariant form in the Burnside ring (induction from the stabilisers), Proposition 6.9.2 and the homotopy statements are not formalized; the marks of both sides of Propositions 6.9.1, 6.9.2 and Theorem 6.9.3 are compared for small groups in checks/sage/chapter-6b.py.",
+  "passages": [
+   "prop:lefschetz-invariant-inversion",
+   "th:steinberg-inversion"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/ShiftedBracket.lean",
+  "declarations": [
+   "BensonCohomology.ShiftedBracket.bracket_identity",
+   "BensonCohomology.ShiftedBracket.delta_bracket",
+   "BensonCohomology.ShiftedBracket.delta_lhs"
+  ],
+  "book": "Section 5.8, p. 183 (as corrected): lambda_r (g_r - 1)(sum_(i<r) lambda_i gamma_i) - (sum_(i<r) lambda_i (g_i - 1)) lambda_r gamma_r = sum_(i<r) lambda_i lambda_r [(g_r - 1) gamma_i - (g_i - 1) gamma_r], and each bracket lies in Omega^2 k = Ker(delta), delta(gamma_i) = g_i - 1.",
+  "limitations": "Any commutative ring R (the book's kE), R-module M (P_1), elements a_i (g_i - 1), scalars lambda_i in R and an R-linear delta with delta(gamma_i) = a_i. Not formalized: that Ker(delta) is generated by the b_i and c_ij, the congruence v^(p-1)(sum lambda_i gamma_i) = sum lambda_i^p b_i modulo Rad(Omega^2 k) and the cancellation of the two sums; these are checked symbolically in the lambda_i for (Z/3)^2, (Z/3)^3, (Z/5)^2 in checks/sage/chapter-5a.py (Section 5.8), with the printed bracket refuted.",
+  "passages": [
+   "lem:rank-variety-isomorphism",
+   "th:rank-variety-equality"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/SimplicialShuffle.lean",
+  "declarations": [
+   "BensonCohomology.SimplicialShuffle.rel_dd",
+   "BensonCohomology.SimplicialShuffle.rel_ds_lt",
+   "BensonCohomology.SimplicialShuffle.rel_ds_eq",
+   "BensonCohomology.SimplicialShuffle.rel_ds_succ",
+   "BensonCohomology.SimplicialShuffle.rel_ds_gt",
+   "BensonCohomology.SimplicialShuffle.rel_ss",
+   "BensonCohomology.SimplicialShuffle.shuffle_defined",
+   "BensonCohomology.SimplicialShuffle.shuffle_printed_undefined"
+  ],
+  "book": "Section 1.8: the face maps j -> j (j < i), j + 1 (j >= i) and degeneracy maps j -> j (j <= i), j - 1 (j > i) of the category Delta satisfy the five relations of p. 23 (read contravariantly); in the Eilenberg-Zilber map of p. 27 every degeneracy s_(nu_k) is defined (nu_k <= p + k - 1, 1-based) when the shuffles permute {0, ..., n - 1}, as corrected, while with the printed {1, ..., n} the label n is applied to an (n - 1)-simplex.",
+  "limitations": "The maps of Delta as functions N -> N (the relations hold on all of N); the simplicial relations are the identities of these maps, not of the simplicial operators of an arbitrary simplicial set. The signs of the shuffles, the chain map property of the Eilenberg-Zilber and Alexander-Whitney maps and AW nabla = id are checked in the universal cases Delta[p] x Delta[q], p + q <= 6, in checks/sage/chapter-1.py (section 1.8).",
+  "passages": [
+   "sec:simplicial-sets"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/SteenrodNormalisation.lean",
+  "declarations": [
+   "BensonCohomology.SteenrodNormalisation.wilson",
+   "BensonCohomology.SteenrodNormalisation.descFactorial_cast",
+   "BensonCohomology.SteenrodNormalisation.half_factorial_sq",
+   "BensonCohomology.SteenrodNormalisation.c_even",
+   "BensonCohomology.SteenrodNormalisation.c_odd",
+   "BensonCohomology.SteenrodNormalisation.P0_eq_one_iff",
+   "BensonCohomology.SteenrodNormalisation.theta_one_eq",
+   "BensonCohomology.SteenrodNormalisation.printed_theta_fails",
+   "BensonCohomology.SteenrodNormalisation.printed_norm_fails"
+  ],
+  "book": "Section 4.4, Definition 4.4.3 and the Remark after it: ((p-1)/2)!^2 = (-1)^((p+1)/2) in Z/p (from Wilson's lemma); Section 4.5, end (p. 144): with theta_(2s) = (-1)^s, theta_(2s+1) = (-1)^s theta_1, the normalisation of Definition 4.4.3 gives P^0 = 1 in every degree iff theta_1 = (-1)^m m! = -(m!)^-1 (m = (p-1)/2); the printed theta_1 = m! fails for p = 3 mod 4; Section 4.6, Case (ii) (p. 146): the constant c_1 = (-1)^m m! of the first display in degree 1 is never the printed (m!)^-1.",
+  "limitations": "ZMod p for a prime p (odd where stated). The values theta_(2s) = (-1)^s, theta_(2s+1) = (-1)^s theta_1 and the relation P^0 = theta_r / c_r are taken from the book as definitions of the functions theta and c; the norm, the operations D_j and the realisation of the sign of theta_1 by an order of the cosets are not formalized (the norm is computed at chain level for p = 2, 3, 5 in checks/sage/chapter-4a.py; the consistency with Section 4.6 is checked in checks/sage/chapter-4b.py). Wilson's lemma is re-proved as in mathlib because Mathlib.NumberTheory.Wilson is not part of the local build.",
+  "passages": [
+   "def:steenrod-powers",
+   "th:steenrod-powers",
+   "sec:steenrod-proof",
+   "sec:adem-relations"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/SymplecticHalving.lean",
+  "declarations": [
+   "BensonCohomology.SymplecticHalving.antisymm",
+   "BensonCohomology.SymplecticHalving.halves_add",
+   "BensonCohomology.SymplecticHalving.halves_sub",
+   "BensonCohomology.SymplecticHalving.isotropic_split",
+   "BensonCohomology.SymplecticHalving.forced_zero",
+   "BensonCohomology.SymplecticHalving.no_y0_of_xprime_zero"
+  ],
+  "book": "Section 7.4, proof of Theorem 7.4.1 (i), p. 245: for an alternating form with 2 invertible, x0 = (x + x')/2, x0' = (x - x')/2, y0 with (x0, y0) = 0 and (x0', y0) = a/2, y0' = y - y0, one has (x0, y0') = a/2, (y0, x0') = -a/2, (x0 + y0, x0' + y0') = 0, (x0', y0') = 0 and (x0 + y0) + (x0' + y0') = x + y; for n = 1 (X a line) the only admissible x' is 0 and then no y0 exists, so the section needs n >= 2.",
+  "limitations": "Any field with 2 != 0 and any module V with a bilinear map B; isotropy of X, Y enters only through B x x' = 0 and B y0 y = 0, the choices of x', y0 are hypotheses. The existence of y0 for n >= 2 (perfect pairing of X and Y, x0 and x0' independent) and the passage to H_0(F_M) are not formalized; H_0(F_M) = M is computed for Sp_4(F_3), Sp_4(F_5), Sp_4(F_7), Sp_6(F_3) and the identities are checked for every z = x + y of Sp_4(F_3), Sp_4(F_5), Sp_6(F_3) in checks/sage/chapter-7b.py.",
+  "passages": [
+   "th:symplectic-fixed-point-homology"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/TensorHomologyCounterexample.lean",
+  "declarations": [
+   "BensonCohomology.TensorHomologyCounterexample.ker_dC",
+   "BensonCohomology.TensorHomologyCounterexample.subsingleton_H1C_tensor",
+   "BensonCohomology.TensorHomologyCounterexample.two_smul_zmod",
+   "BensonCohomology.TensorHomologyCounterexample.dCD_eq_zero",
+   "BensonCohomology.TensorHomologyCounterexample.ker_dCD",
+   "BensonCohomology.TensorHomologyCounterexample.nontrivial_tensor",
+   "BensonCohomology.TensorHomologyCounterexample.nontrivial_H1CD",
+   "BensonCohomology.TensorHomologyCounterexample.not_exact",
+   "BensonCohomology.TensorHomologyCounterexample.not_iso"
+  ],
+  "book": "Section 3.4, Proposition 3.4.4 as printed (without H_0(D) flat) is false: Lambda = ZZ, C = (ZZ --2--> ZZ), D = ZZ/2 in degree 0; H_1(C) = 0 but H_1(C (x) D) = Ker(dC (x) 1) = ZZ (x) ZZ/2 ~ ZZ/2 != 0, so H_1(C (x) D) is not isomorphic to H_1(C) (x) H_0(D) and C (x) D is not exact in positive degrees although C is.",
+  "limitations": "Only the counterexample, with the complexes written out in degrees 1, 0 (C_2 = 0, so H_1 is the kernel). The corrected proposition (its spectral sequence argument and flatness) is not formalized; it is checked on random complexes over ZZ and over group algebras in checks/sage/chapter-3a.py.",
+  "passages": [
+   "prop:tensor-homology"
+  ]
+ },
+ {
+  "file": "checks/lean/BensonCohomology/WhiteheadExactness.lean",
+  "declarations": [
+   "BensonCohomology.WhiteheadExactness.exact_step",
+   "BensonCohomology.WhiteheadExactness.exact_step_converse",
+   "BensonCohomology.WhiteheadExactness.whitehead_exact",
+   "BensonCohomology.WhiteheadExactness.printed_fails"
+  ],
+  "book": "Section 1.4, proof of Theorem 1.4.3 (Whitehead) as corrected: by the long exact sequence of the mapping cylinder, (A) f_* iso for i < n and epi for i = n is equivalent to pi_i(M_f, X, x0) = 0 for i <= n (and (B) to H_i(M_f, X) = 0 for i <= n); the printed 'i < n' fails already for n = 1 (the sequence of f : point -> S^1).",
+  "limitations": "An abstract long exact sequence ... -> A(i+1) -> B(i) -> C(i) -> A(i) -> ... with groups B(i), C(i), homomorphisms f(i) and pointed sets A(i) (i >= 1), exact as pointed sets; (A) is stated without surjectivity on pi_0, automatic for the path connected X, Y of the theorem. The homotopy and homology sequences of the mapping cylinder, the cylinder itself and the relative Hurewicz theorem are not formalized; the homology half is checked on skeleton pairs over F_2, F_3, Q in checks/sage/chapter-1.py (section 1.4).",
+  "passages": [
+   "th:whitehead-homology"
+  ]
+ }
+]
